@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/avatar.png";
 import { AuthContext } from "../context/AuthContext";
+import Switch from "./Switch";
 
 const Navbar = () => {
   const { currentUser, logOut } = useContext(AuthContext);
@@ -10,12 +11,12 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="flex w-full flex-wrap items-center justify-between bg-neutral-100 dark:bg-gray-900 py-3 dark:text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start fixed top-0 z-20"
+        className="flex w-full flex-wrap items-center justify-between bg-neutral-200 dark:bg-gray-900 py-3 dark:text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start fixed top-0 z-20"
         data-te-navbar-ref=""
       >
         <div className="flex w-full flex-wrap items-center justify-between px-6">
-          <Link className="pr-2 text-2xl font-semibold" to="/">
-            React Movie App
+          <Link className="px-4 py-0.5 text-2xl font-semibold border-bordered rounded border-2 border-gray-900 dark:border-gray-light " to="/">
+            Movie-App23
           </Link>
 
           {/* Collapsible wrapper */}
@@ -24,6 +25,7 @@ const Navbar = () => {
             {currentUser && (
               <h5 className="mr-2 capitalize">{currentUser.displayName}</h5>
             )}
+            <Switch />
             <div className="relative" data-te-dropdown-ref="">
               <span
                 className="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
@@ -38,6 +40,7 @@ const Navbar = () => {
                   style={{ height: 25, width: 25 }}
                   alt=""
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
               </span>
               <ul
@@ -47,7 +50,7 @@ const Navbar = () => {
               >
                 <li>
                   <Link
-                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     to="/register"
                     data-te-dropdown-item-ref=""
                   >
@@ -56,7 +59,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     to="/login"
                     data-te-dropdown-item-ref=""
                   >
@@ -65,7 +68,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <span
-                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     role="button"
                     data-te-dropdown-item-ref=""
                     onClick={() => logOut()}
@@ -79,7 +82,7 @@ const Navbar = () => {
           {/* Right elements */}
         </div>
       </nav>
-      <div className="h-[52px]"></div>
+      <div className="h-[60px]"></div>
     </div>
   );
 };
