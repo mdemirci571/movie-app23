@@ -101,6 +101,7 @@ Build a Movie App using ReactJS.
 
 - Step 6: Add project gif/mp4 to your project and README.md file.
 
-### At the end of the project:
+### At the end of the project: 
+<br>
+![Project live](https://movie-app23.netlify.app/)
 
-![Project Snapshot](movie-app1.gif)
