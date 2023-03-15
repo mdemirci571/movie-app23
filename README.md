@@ -100,6 +100,7 @@ Build a Movie App using ReactJS.
 - Step 5: You can use css frameworks like Bootstrap, Semantic UI, Material UI.
 
 - Step 6: Add project gif/mp4 to your project and README.md file.
-At the end of the project:
+
+### At the end of the project:
 
 ![Project Snapshot](movie-app1.gif)
