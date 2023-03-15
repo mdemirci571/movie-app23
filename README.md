@@ -102,4 +102,4 @@ Build a Movie App using ReactJS.
 - Step 6: Add project gif/mp4 to your project and README.md file.
 At the end of the project:
 
-![Project Snapshot](https://www.canva.com/design/DAFdSI8woNE/Zzn5QnK7KwW4Z0H8hX_NFA/watch?utm_content=DAFdSI8woNE&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
+![Project Snapshot](movie-app1.gif)
