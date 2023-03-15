@@ -103,5 +103,5 @@ Build a Movie App using ReactJS.
 
 ### At the end of the project: 
 <br>
-![Project live](https://movie-app23.netlify.app/)
+[Project live](https://movie-app23.netlify.app/)
 
