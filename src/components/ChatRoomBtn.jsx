@@ -1,13 +1,14 @@
 import React, {useContext} from 'react'
 import { IoMdChatbubbles  } from 'react-icons/io'
-import toast from "react-hot-toast"
+
 import { AuthContext } from '../context/AuthContextProvider'
+import { toastErrorNotify } from '../helpers/ToastNotify'
 
 const ChatRoomBtn = () => {
   const {currentUser} = useContext(AuthContext)
   const handleNavigate = () => {
     if (!currentUser) {
-      toast.error("Please log in for enter chat room!")
+      toastErrorNotify("Please log in for enter chat room!")
     }
   }
   return (
