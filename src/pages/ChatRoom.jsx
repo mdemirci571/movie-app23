@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { onSnapshot, query, collection, orderBy } from 'firebase/firestore'
-import { db } from "../auth/firebase"
+import { auth, db } from "../auth/firebase"
 import Messages from '../components/Messages'
 import SendMessage from '../components/SendMessage'
-import { auth } from '../auth/firebase'
+
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([])
