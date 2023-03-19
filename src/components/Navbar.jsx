@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/avatar.png";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContextProvider";
 import Switch from "./Switch";
 import ChatRoomBtn from "./ChatRoomBtn";
 
@@ -17,8 +17,8 @@ const Navbar = () => {
         data-te-navbar-ref=""
       >
         <div className="flex w-full flex-wrap items-center justify-between px-6">
-          <Link className="px-4 py-0.5 text-2xl font-semibold border-bordered rounded border-2 border-gray-900 dark:border-gray-light " to="/">
-            Movie-App23
+          <Link className="px-4 py-0.5 text-2xl font-semibold border-bordered rounded border-2 border-gray-900 dark:border-gray-light " to="/" onClick={()=> window.scrollTo(0, 0)}>
+            Movie App23
           </Link>
 
           {/* Collapsible wrapper */}
