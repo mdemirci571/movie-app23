@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import GoogleIcon from "../assets/icons/GoogleIcon";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContextProvider";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,6 +27,7 @@ const Login = () => {
               className="peer"
               placeholder=" "
               required
+              autoComplete ="email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="floating_email">Email</label>
@@ -38,6 +39,7 @@ const Login = () => {
               className="peer"
               placeholder=" "
               required
+              autoComplete ="password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <label htmlFor="floating_password">Password</label>
