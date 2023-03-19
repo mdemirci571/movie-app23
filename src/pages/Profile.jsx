@@ -43,7 +43,7 @@ const Profile = () => {
             className="peer text-center"
             required
             value={email}
-            disabled="true"
+            disabled={true}
           />
           <label>E-mail</label>
         </div>
