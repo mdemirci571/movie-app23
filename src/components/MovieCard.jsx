@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContextProvider";
+import { toastWarnNotify } from "../helpers/ToastNotify";
 
 const IMG_API = "https://image.tmdb.org/t/p/w1280";
 const defaultImage =
@@ -20,10 +21,10 @@ const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
   };
   const handleRedirect = () => {
     if (currentUser) {
-      navigate(`/details/${movie.id}`) 
+      navigate(`/details/${id}`) 
     }else{
-      toast.error("Pleage log in for more details!")
-      (navigate(`/details/${movie.id}`))
+      toastWarnNotify.error("Pleage log in for more details!")
+      (navigate(`/details/${id}`))
     }
   }
   return (
@@ -38,6 +39,10 @@ const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
         alt="movie-card"
       />
       <div className="flex align-baseline justify-between p-1 text-white">
+      <div className="movie-over">
+        <h2>Overview</h2>
+        <p>{overview}</p>
+      </div>
         <h5>{title}</h5>
         {currentUser && (
           <span className={`tag ${getVoteClass(vote_average)}`}>
@@ -45,10 +50,7 @@ const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
           </span>
         )}
       </div>
-      <div className="movie-over">
-        <h2>Overview</h2>
-        <p>{overview}</p>
-      </div>
+      
       <button
                   type="button"
                   className="inline-block rounded bg-danger px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)]"
