@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import {auth, db} from '../auth/firebase'
 import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
-import toast from "react-hot-toast"
+import { toastErrorNotify } from '../helpers/ToastNotify';
 const SendMessage = ({scroll}) => {
   const [input, setInput] = useState('');
 
   const sendMessage = async (e) => {
     e.preventDefault()
     if (input === '') {
-        toast.error('Please enter a valid message!')
+        toastErrorNotify('Please enter a valid message!')
         return
     }
     const {uid, displayName, photoURL} = auth.currentUser
@@ -20,8 +20,7 @@ const SendMessage = ({scroll}) => {
         timestamp: serverTimestamp()
     })
     setInput('')
-    scroll.current.scrollIntoView({behavior: 'smooth'})
-  }
+    }
 
   return (
     <form onSubmit={sendMessage} className="h-14 w-full max-w-[728px] flex text-xl  bottom-0">
