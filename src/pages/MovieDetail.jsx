@@ -6,16 +6,18 @@ import VideoSection from "../components/VideoSection";
 const MovieDetail = () => {
   const [movieDetails, setMovieDetails] = useState("");
   const [videoKey, setVideoKey] = useState();
-  const { id } = useParams();
   const {
     title,
+    tagline,
+    genres,
+    popularity,
     poster_path,
     overview,
     vote_average,
     release_date,
     vote_count,
   } = movieDetails;
-
+  const { id } = useParams();
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
   const movieDetailBaseUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
   const baseImageUrl = "https://image.tmdb.org/t/p/w1280";
@@ -23,6 +25,16 @@ const MovieDetail = () => {
     "https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
   const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
 
+  const getVoteClass = (vote) => {
+    if (vote >= 8) {
+      return "green";
+    } else if (vote >= 6) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  };
+  
   useEffect(() => {
     axios
       .get(movieDetailBaseUrl)
