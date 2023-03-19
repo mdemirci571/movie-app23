@@ -7,10 +7,15 @@ import { toastWarnNotify } from "../helpers/ToastNotify";
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
+
+const POPULAR_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`
+  const UPCOMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`
+  const TOP_API = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`
 const Main = () => {
-  const { movies, loading, getMovies } = useContext(MovieContext);
+  const { movies, loading, errorStatus, getMovies } = useContext(MovieContext);
   const { currentUser } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -23,7 +28,19 @@ const Main = () => {
     } else {
       toastWarnNotify("please enter a text");
     }
+    e.target.reset()
   };
+  function handleOptionChange(event) {
+    const selectedOption = event.target.value;
+    setSelectedOption(selectedOption);
+    if (selectedOption === "popular") {
+      getMovies(POPULAR_API);
+    } else if (selectedOption === "upcoming") {
+      getMovies(UPCOMING_API);
+    } else if (selectedOption === "top-rated") {
+      getMovies(TOP_API);
+    }
+  }
   return (
     <>
       <form className="flex justify-center p-2" onSubmit={handleSubmit}>
@@ -37,6 +54,11 @@ const Main = () => {
           Search
         </button>
       </form>
+      <select value={selectedOption} onChange={handleOptionChange} className="px-2 text-center w-25 rounded-lg bg-gray-50 text-gray-900 border border-gray-300 focus:border-danger-600 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-danger-600 appearance-none focus:outline-none">
+            <option value="popular">Popular Movies</option>
+            <option value="upcoming">Upcoming Movies</option>
+            <option value="top-rated">Top Rated Movies</option>
+        </select>
       <div className="flex justify-center flex-wrap">
         {loading ? (
           <div
