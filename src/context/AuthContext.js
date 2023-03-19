@@ -1,3 +1,4 @@
+import React, { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -6,10 +7,11 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
-import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../auth/firebase";
+import { useNavigate } from "react-router-dom";
+
 import {
   toastErrorNotify,
   toastSuccessNotify,
@@ -33,20 +35,22 @@ const AuthContextProvider = ({ children }) => {
     userObserver();
   }, []);
 
-  const createUser = async (email, password, displayName) => {
+  const createUser = async (email, password, displayName, photoURL) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
-      // let userCredential = await createUserWithEmailAndPassword(
-      //   auth,
-      //   email,
-      //   password
-      // );
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       //? kullanıcı profilini güncellemek için kullanılan firebase metodu
       await updateProfile(auth.currentUser, {
         displayName: displayName,
+        photoURL: photoURL || "https://i.ibb.co/GTgY47j/avatar.png",
       });
       navigate("/");
       toastSuccessNotify("Registered successfully!");
+      return user;
     } catch (error) {
       toastErrorNotify(error.message);
     }
@@ -58,16 +62,24 @@ const AuthContextProvider = ({ children }) => {
   const signIn = async (email, password) => {
     //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
       toastSuccessNotify("Logged in successfully!");
+      return user;
     } catch (error) {
       toastErrorNotify(error.message);
     }
   };
 
   const logOut = () => {
-    signOut(auth);
+    try {
+      signOut(auth);
+      toastSuccessNotify("Logged out successfully!");
+      navigate("/login");
+      return true;
+    } catch (error) {
+      toastErrorNotify(error.message);
+    }
   };
 
   const userObserver = () => {
@@ -98,13 +110,12 @@ const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     //? Açılır pencere ile giriş yapılması için kullanılan firebase metodu
     signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         navigate("/");
         toastSuccessNotify("Logged in successfully!");
       })
       .catch((error) => {
-        console.log(error);
+        toastErrorNotify(error.message);
       });
   };
 
@@ -122,6 +133,19 @@ const AuthContextProvider = ({ children }) => {
         // ..
       });
   };
+  const profileChange = async (displayName, photoURL) => {
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: displayName,
+        photoURL: photoURL,
+      });
+      toastSuccessNotify("Profile saved!");
+      return true;
+    } catch (error) {
+      toastErrorNotify(error.message);
+    }
+  };
+
   const values = {
     createUser,
     signIn,
@@ -129,6 +153,8 @@ const AuthContextProvider = ({ children }) => {
     signUpProvider,
     forgotPassword,
     currentUser,
+    setCurrentUser,
+    profileChange,
   };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
