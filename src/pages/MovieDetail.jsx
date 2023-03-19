@@ -68,7 +68,7 @@ const MovieDetail = () => {
               <li className="px-6 py-2 border-b border-gray-400 w-full rounded-t-lg">
                 {"Release Date : " + release_date}
               </li>
-              <li className="px-6 py-2 border-b border-gray-400 w-full">
+              <li className={`px-6 py-2 border-b border-gray-400 w-full tag ${getVoteClass(vote_average)}`}>
                 {"Rate : " + vote_average}
               </li>
               <li className="px-6 py-2 border-b border-gray-400 w-full">
