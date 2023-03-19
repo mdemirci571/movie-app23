@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import GoogleIcon from "../assets/icons/GoogleIcon";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContextProvider";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -41,6 +41,7 @@ const Register = () => {
               className="peer"
               placeholder=" "
               required
+              autoComplete ="firstName"
               onChange={(e) => setFirstName(e.target.value)}
             />
             <label htmlFor="floating_email">First Name</label>
@@ -52,6 +53,7 @@ const Register = () => {
               required
               className="peer"
               placeholder=" "
+              autoComplete ="lastName"
               onChange={(e) => setLastName(e.target.value)}
             />
             <label htmlFor="floating_text">Last Name</label>
@@ -63,6 +65,7 @@ const Register = () => {
               className="peer"
               placeholder=" "
               required
+              autoComplete ="email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="floating_email">Email</label>
@@ -74,6 +77,7 @@ const Register = () => {
               className="peer"
               placeholder=" "
               required
+              autoComplete ="password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <label htmlFor="floating_password">Password</label>
