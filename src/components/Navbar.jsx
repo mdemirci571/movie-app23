@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import avatar from "../assets/icons/avatar.png";
 import { AuthContext } from "../context/AuthContext";
 import Switch from "./Switch";
+import ChatRoomBtn from "./ChatRoomBtn";
+
 
 const Navbar = () => {
   const { currentUser, logOut } = useContext(AuthContext);
-  // const currentUser = { displayName: "felix franko" };
+  // const currentUser = { displayName: "maximilian" };
   // const currentUser = false;
   return (
     <div>
@@ -25,6 +27,7 @@ const Navbar = () => {
             {currentUser && (
               <h5 className="mr-2 capitalize">{currentUser.displayName}</h5>
             )}
+            <Link to="/chatroom"><ChatRoomBtn/></Link>
             <Switch />
             <div className="relative" data-te-dropdown-ref="">
               <span
@@ -48,7 +51,16 @@ const Navbar = () => {
                 aria-labelledby="dropdownMenuButton2"
                 data-te-dropdown-menu-ref=""
               >
-                <li>
+                {currentUser ? <li>
+                  <Link
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    to="/profile"
+                    data-te-dropdown-item-ref=""
+                  >
+                    Profile
+                  </Link>
+                </li> : null}
+                {currentUser ? null : <li>
                   <Link
                     className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     to="/register"
@@ -56,26 +68,26 @@ const Navbar = () => {
                   >
                     Register
                   </Link>
-                </li>
-                <li>
+                </li>}
+                {currentUser ? null : <li>
                   <Link
-                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     to="/login"
                     data-te-dropdown-item-ref=""
                   >
                     Login
                   </Link>
-                </li>
-                <li>
+                </li>}
+                {currentUser ? <li>
                   <span
-                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-200 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                     role="button"
                     data-te-dropdown-item-ref=""
-                    onClick={() => logOut()}
+                    onClick={logOut}
                   >
                     Logout
                   </span>
-                </li>
+                  </li> : null}
               </ul>
             </div>
           </div>
